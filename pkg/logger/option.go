@@ -82,7 +82,7 @@ func WithShowLine(showLine *bool) Option {
 		if showLine == nil {
 			return
 		}
-		z.ShowLine = *showLine
+		z.ShowLine = showLine
 	}
 }
 
@@ -93,7 +93,7 @@ func WithLogInConsole(logInConsole *bool) Option {
 		if logInConsole == nil {
 			return
 		}
-		z.LogInConsole = *logInConsole
+		z.LogInConsole = logInConsole
 	}
 }
 

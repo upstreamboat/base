@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-// NewGormZap 创建 gormzap zap 日志, 数据库初始化时使用
+// NewGormZap 创建 gorm zap 日志, 数据库初始化时使用
 func NewGormZap(opts ...GormOption) logger.Interface {
 	if log == nil {
 		InitLog()
