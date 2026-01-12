@@ -4,7 +4,6 @@ import (
 	"sync"
 
 	"github.com/upstreamboat/base/pkg/logger/internal"
-
 	"go.uber.org/zap"
 )
 
@@ -28,7 +27,7 @@ func InitLog(opts ...Option) *zap.Logger {
 	return log
 }
 
-// Log 获取日志实例
-func Log() *zap.Logger {
+// L 获取日志实例
+func L() *zap.Logger {
 	return log
 }

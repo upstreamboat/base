@@ -2,7 +2,10 @@ module github.com/upstreamboat/base
 
 go 1.25
 
-require go.uber.org/zap v1.27.1
+require (
+	go.uber.org/zap v1.27.1
+	gorm.io/gorm v1.31.1
+)
 
 require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect

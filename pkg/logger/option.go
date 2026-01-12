@@ -1,6 +1,8 @@
 package logger
 
-import "github.com/upstreamboat/base/pkg/logger/internal"
+import (
+	"github.com/upstreamboat/base/pkg/logger/internal"
+)
 
 // Option 日志配置项
 type Option func(*internal.Zap)
