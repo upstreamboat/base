@@ -8,14 +8,30 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-// NewGormZap 创建 gorm zap 日志, 数据库初始化时使用
+// NewGormZap 创建 gormzap zap 日志, 数据库初始化时使用
 func NewGormZap(opts ...GormOption) logger.Interface {
-	gz := &GormZap{
-		zap:           log,
-		level:         logger.Warn,            // 默认生产级
-		slowThreshold: 200 * time.Millisecond, // 默认慢 SQL
+	// 默认值
+	level := "warn"
+	slowThreshold := 200 * time.Millisecond
+
+	// 允许用 zap 配置修改 gorm 配置
+	{
+		if cfg.SqlLevel != "" {
+			level = cfg.SqlLevel
+		}
+
+		if cfg.SqlSlowTime != 0 {
+			slowThreshold = cfg.SqlSlowTime
+		}
 	}
 
+	gz := &GormZap{
+		zap:           log,
+		level:         parseLevel(level), // 默认生产级
+		slowThreshold: slowThreshold,     // 默认慢 SQL
+	}
+
+	// 传参修改 gorm 配置
 	for _, opt := range opts {
 		opt(gz)
 	}

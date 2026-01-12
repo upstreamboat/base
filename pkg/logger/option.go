@@ -1,6 +1,8 @@
 package logger
 
 import (
+	"time"
+
 	"github.com/upstreamboat/base/pkg/logger/internal"
 )
 
@@ -72,9 +74,21 @@ func WithLogInConsole(logInConsole bool) Option {
 }
 
 // WithRetentionDay 日志保留天数
-// 默认 -1 (即永久), 小于等于0为永久保留
+// 默认 30, 小于等于0为永久保留
 func WithRetentionDay(retentionDay int) Option {
 	return func(z *internal.Zap) {
 		z.RetentionDay = retentionDay
+	}
+}
+
+func WithSqlLevel(sqlLevel string) Option {
+	return func(z *internal.Zap) {
+		z.SqlLevel = sqlLevel
+	}
+}
+
+func WithSqlSlowTime(slowTime time.Duration) Option {
+	return func(z *internal.Zap) {
+		z.SqlSlowTime = slowTime
 	}
 }

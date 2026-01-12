@@ -18,6 +18,9 @@ type Zap struct {
 	ShowLine      bool   `mapstructure:"show-line" json:"show-line" yaml:"show-line"`                // 显示行
 	LogInConsole  bool   `mapstructure:"log-in-console" json:"log-in-console" yaml:"log-in-console"` // 输出控制台
 	RetentionDay  int    `mapstructure:"retention-day" json:"retention-day" yaml:"retention-day"`    // 日志保留天数
+
+	SqlLevel    string        `mapstructure:"sql-level" json:"sql-level" yaml:"sql-level"`             // sql 日志级别
+	SqlSlowTime time.Duration `mapstructure:"sql-slow-time" json:"sql-slow-time" yaml:"sql-slow-time"` // sql 慢查询阈值
 }
 
 func NewConfig() *Zap {
@@ -31,7 +34,10 @@ func NewConfig() *Zap {
 		StacktraceKey: "stacktrace",                 // 栈名
 		ShowLine:      true,                         // 显示行号
 		LogInConsole:  true,                         // 输出到控制台
-		RetentionDay:  -1,                           // 日志保留天数, 小于等于0则永久保留
+		RetentionDay:  30,                           // 日志保留天数, 小于等于0则永久保留
+
+		SqlLevel:    "warn",
+		SqlSlowTime: 200 * time.Millisecond,
 	}
 }
 
