@@ -10,6 +10,10 @@ import (
 
 // NewGormZap 创建 gormzap zap 日志, 数据库初始化时使用
 func NewGormZap(opts ...GormOption) logger.Interface {
+	if log == nil {
+		InitLog(WithLevel("debug"), WithLogInConsole(true))
+	}
+
 	// 默认值
 	level := "warn"
 	slowThreshold := 200 * time.Millisecond
