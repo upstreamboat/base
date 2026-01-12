@@ -20,6 +20,9 @@ type GormOption func(*GormZap)
 //	error: "error"
 func WithGormLevel(level string) GormOption {
 	return func(l *GormZap) {
+		if level == "" {
+			return
+		}
 		l.level = parseLevel(level)
 	}
 }
@@ -27,6 +30,9 @@ func WithGormLevel(level string) GormOption {
 // WithGormSlowThreshold 设置慢查询阈值
 func WithGormSlowThreshold(d time.Duration) GormOption {
 	return func(l *GormZap) {
+		if d == 0 {
+			return
+		}
 		l.slowThreshold = d
 	}
 }
