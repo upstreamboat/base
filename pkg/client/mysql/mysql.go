@@ -1,10 +1,9 @@
-package client
+package mysql
 
 import (
 	"strings"
 	"time"
 
-	"github.com/upstreamboat/base/pkg/logger"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
@@ -13,7 +12,6 @@ import (
 
 func InitMysql(dsn string) *gorm.DB {
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
-		Logger: logger.NewGormZap(),
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,                              // 单数表名
 			NameReplacer:  strings.NewReplacer("PID", "pid"), // 缩写字段如何映射列名

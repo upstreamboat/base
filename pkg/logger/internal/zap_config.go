@@ -15,31 +15,23 @@ type Zap struct {
 	Director      string `mapstructure:"director" json:"director"  yaml:"director"`                  // 日志文件夹
 	EncodeLevel   string `mapstructure:"encode-level" json:"encode-level" yaml:"encode-level"`       // 编码级
 	StacktraceKey string `mapstructure:"stacktrace-key" json:"stacktrace-key" yaml:"stacktrace-key"` // 栈名
-	ShowLine      *bool  `mapstructure:"show-line" json:"show-line" yaml:"show-line"`                // 显示行
-	LogInConsole  *bool  `mapstructure:"log-in-console" json:"log-in-console" yaml:"log-in-console"` // 输出控制台
+	ShowLine      bool   `mapstructure:"show-line" json:"show-line" yaml:"show-line"`                // 显示行
+	LogInConsole  bool   `mapstructure:"log-in-console" json:"log-in-console" yaml:"log-in-console"` // 输出控制台
 	RetentionDay  int    `mapstructure:"retention-day" json:"retention-day" yaml:"retention-day"`    // 日志保留天数
-
-	SqlLevel    string        `mapstructure:"sql-level" json:"sql-level" yaml:"sql-level"`             // sql 日志级别
-	SqlSlowTime time.Duration `mapstructure:"sql-slow-time" json:"sql-slow-time" yaml:"sql-slow-time"` // sql 慢查询阈值
 }
 
 func NewConfig() *Zap {
-	t := true
-
 	return &Zap{
 		// debug,info,warn,error,dpanic,panic,fatal
 		Level:         "info",                       // 级别
 		Prefix:        "",                           // 日志前缀
 		Format:        "console",                    // 输出
-		Director:      "logs",                       // 日志文件夹
+		Director:      "",                           // 日志文件夹
 		EncodeLevel:   "LowercaseColorLevelEncoder", // 小写带色彩日志
-		StacktraceKey: "stacktrace",                 // 栈名
-		ShowLine:      &t,                           // 显示行号
-		LogInConsole:  &t,                           // 输出到控制台
-		RetentionDay:  30,                           // 日志保留天数, 小于等于0则永久保留
-
-		SqlLevel:    "warn",
-		SqlSlowTime: 200 * time.Millisecond,
+		StacktraceKey: "",                           // 栈名
+		ShowLine:      true,                         // 显示行号
+		LogInConsole:  true,                         // 输出到控制台
+		RetentionDay:  -1,                           // 日志保留天数, 小于等于0则永久保留
 	}
 }
 

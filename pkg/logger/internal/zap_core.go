@@ -30,10 +30,8 @@ func NewZap(c *Zap) (logger *zap.Logger) {
 	logger = zap.New(zapcore.NewTee(cores...))
 	// 启用 Error 及以上级别的堆栈捕捉，确保 entry.Stack 可用
 	opts := []zap.Option{zap.AddStacktrace(zapcore.ErrorLevel)}
-	if config.ShowLine != nil {
-		if *config.ShowLine {
-			opts = append(opts, zap.AddCaller())
-		}
+	if config.ShowLine {
+		opts = append(opts, zap.AddCaller())
 	}
 	logger = logger.WithOptions(opts...)
 	return logger
@@ -62,11 +60,9 @@ func (z *ZapCore) WriteSyncer(formats ...string) zapcore.WriteSyncer {
 		CutterWithLayout(time.DateOnly),
 		CutterWithFormats(formats...),
 	)
-	if config.LogInConsole != nil {
-		if *config.LogInConsole {
-			multiSyncer := zapcore.NewMultiWriteSyncer(os.Stdout, cutter)
-			return zapcore.AddSync(multiSyncer)
-		}
+	if config.LogInConsole {
+		multiSyncer := zapcore.NewMultiWriteSyncer(os.Stdout, cutter)
+		return zapcore.AddSync(multiSyncer)
 	}
 
 	return zapcore.AddSync(cutter)

@@ -9,8 +9,8 @@ import (
 
 var (
 	log      *zap.Logger
-	initOnce sync.Once
 	cfg      *internal.Zap
+	initOnce sync.Once
 )
 
 // InitLog 初始化日志
@@ -43,12 +43,4 @@ func C() *internal.Zap {
 		InitLog()
 	}
 	return cfg
-}
-
-type ZapStarter struct {
-}
-
-func (s *ZapStarter) Init() error {
-	InitLog()
-	return nil
 }
