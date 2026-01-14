@@ -25,14 +25,30 @@ func InitLog(opts ...Option) *zap.Logger {
 		zap.ReplaceGlobals(log)
 	})
 
+	// log 实例已赋值, 无论是否接收返回的实例都可以正常使用
 	return log
 }
 
-// L 获取日志实例
+// L 日志实例
 func L() *zap.Logger {
+	if log == nil {
+		InitLog() // 使用默认配置兜底
+	}
 	return log
 }
 
+// C 日志配置
 func C() *internal.Zap {
+	if cfg == nil {
+		InitLog()
+	}
 	return cfg
+}
+
+type ZapStarter struct {
+}
+
+func (s *ZapStarter) Init() error {
+	InitLog()
+	return nil
 }
