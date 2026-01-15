@@ -26,7 +26,7 @@ func NewConfig() *Zap {
 		Level:         "info",                       // 级别
 		Prefix:        "",                           // 日志前缀
 		Format:        "console",                    // 输出
-		Director:      "",                           // 日志文件夹
+		Director:      "logs",                       // 日志文件夹
 		EncodeLevel:   "LowercaseColorLevelEncoder", // 小写带色彩日志
 		StacktraceKey: "",                           // 栈名
 		ShowLine:      true,                         // 显示行号

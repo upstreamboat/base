@@ -32,7 +32,7 @@ func WithFormat(format string) Option {
 }
 
 // WithDirector 日志目录
-// 默认 ""
+// 默认 "logs"
 func WithDirector(director string) Option {
 	return func(z *internal.Zap) {
 		z.Director = director
